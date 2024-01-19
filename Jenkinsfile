@@ -38,11 +38,9 @@ stages {
     agent any
     steps {
         script {
-            sshagent (credentials: ['sshkeyansible']) {
-                sh """ssh -o StrictHostKeyChecking=no -l ubuntu@13.127.188.86 'docker ps'"""
+                sh "ssh -o StrictHostKeyChecking=no -i ubuntu@13.127.188.86 'docker ps'"
             }
         }
     }
-}
 }
 }

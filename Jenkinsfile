@@ -1,5 +1,11 @@
 pipeline {
     agent any
+     environment {
+        // Define your remote server details
+        remoteServer = '13.127.37.206'
+        remoteUser = 'ubuntu'
+        remoteKey = credentials('awsssh')
+        }
 stages {
        stage('Checkout') {
             steps {
@@ -29,20 +35,16 @@ stages {
         }
 
         stage('Deploy') {
-            agent {
-                node {
-                    
-                    label 'nodejs'
-                }
-            }
+            agent any
             steps {
-               script { 
-                     withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dpass', usernameVariable: 'duser')]) {
-                   sh "docker login -u \$duser -p \$dpass"      
-                   sh "docker run -t -id --name nodejs -p 3000:3000 vjyguvi/projectnodejs"
-                    }   
-                }
+                script {
+
+                    sshagent(['awsssh']) {
+                        sh "ssh -o StrictHostKeyChecking=no -i ${remoteKey} ${remoteUser}@${remoteServer} 'docker login -u \$duser -p \$dpass'"
+                        sh "ssh -o StrictHostKeyChecking=no -i ${remoteKey} ${remoteUser}@${remoteServer} 'docker run -t -id --name nodejs -p 3000:3000 vjyguvi/projectnodejs'"
+                    }
             }
+                        }
         }
 }
 }

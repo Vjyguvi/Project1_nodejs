@@ -41,7 +41,7 @@ stages {
 
                 sshagent(['sshkeyansible']) {
 
-                   sh "docker ps"
+                   sh sh """ssh -o StrictHostKeyChecking=no -i ${privateKeyName} ubuntu@3.111.30.67 'docker ps'"""
                     }
             }
                         }

@@ -23,7 +23,7 @@
 ![Screenshot dockerhub](https://github.com/vijaygiitt/Project1_nodejs/assets/157097326/8c9ea3b3-8540-4e99-8a0d-2dc731fb71f9)
 
 ## Deployment:
-+ Use Jenkins to pull the Docker image from the registry into the EC2 instance(node) .
++ Use Jenkins to SSH into the EC2 instance and pull the Docker image from the registry.
   ```bash
     agent {
                 node {

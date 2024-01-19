@@ -35,16 +35,14 @@ stages {
 //        }
 
         stage('Deploy') {
-            agent any
-            steps {
-                script {
-
-                sshagent(['sshkeyansible']) {
-
-                   sh sh """ssh -o StrictHostKeyChecking=no -i ${privateKeyName} ubuntu@3.111.30.67 'docker ps'"""
-                    }
+    agent any
+    steps {
+        script {
+            sshagent(['sshkeyansible']) {
+                sh """ssh -o StrictHostKeyChecking=no -i ${privateKeyName} ubuntu@3.111.30.67 'docker ps'"""
             }
-                        }
         }
+    }
+}
 }
 }

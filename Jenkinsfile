@@ -40,6 +40,9 @@ stages {
                 script {
 
                    sshagent(['sshkeyansible']) {
+
+                       withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dpass', usernameVariable: 'duser')]) {
+                           
                         sh """ssh -o StrictHostKeyChecking=no -i ${privateKeyName} ubuntu@3.111.30.67 'docker login -u ${duser} -p ${dpass}'"""
                     
                     sh """ssh -o StrictHostKeyChecking=no -i ${privateKeyName} ubuntu@3.111.30.67 'docker run -t -id --name nodejs -p 3000:3000 vjyguvi/projectnodejs'"""
@@ -48,5 +51,6 @@ stages {
             }
                         }
         }
+}
 }
 }

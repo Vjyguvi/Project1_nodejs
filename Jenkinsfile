@@ -13,7 +13,7 @@ stages {
             }
         }
 
-        stage('Build Image') {
+        // stage('Build Image') {
             steps {
                 script {
                     
@@ -22,7 +22,7 @@ stages {
             }
         }
 
-        stage('Push Image') {
+        // stage('Push Image') {
             steps {
                 script { 
                      withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dpass', usernameVariable: 'duser')]) {

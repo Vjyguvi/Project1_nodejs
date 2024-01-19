@@ -4,7 +4,7 @@ pipeline {
         // Define your remote server details
         remoteServer = '13.127.188.86'
         remoteUser = 'ubuntu'
-        privateKeyName = credentials('sshkeyansible')
+        privateKeyName = credentials('qqq')
         }
 stages {
        stage('Checkout') {
@@ -38,7 +38,7 @@ stages {
     agent any
     steps {
         script {
-                sh "ssh -o StrictHostKeyChecking=no -i ubuntu@13.127.188.86 'docker ps'"
+                sh "ssh -o StrictHostKeyChecking=no -i ${privateKeyName} ubuntu@13.127.188.86 'docker ps'"
             }
         }
     }

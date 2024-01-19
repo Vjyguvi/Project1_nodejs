@@ -8,8 +8,7 @@
   ![Screenshot jenkins status'](https://github.com/vijaygiitt/Project1_nodejs/assets/157097326/3760ce45-26b3-4343-a598-b6dfa83694ea)
 + Create a new Jenkins job to build the Node.js application and push it to a Docker registry.
   ![Screenshot projectcreated](https://github.com/vijaygiitt/Project1_nodejs/assets/157097326/87d56a69-58c8-4d8a-a0bb-76fbbb82df67)
-+ Jenkins Slave added (Node)
-  ![Screenshot node jenkins](https://github.com/vijaygiitt/Project1_nodejs/assets/157097326/44a266da-9c9c-4151-bd1a-3cf52ef587d9)
+
 ## Build the Docker image:
 
 + Use the Dockerfile to build a Docker image of the Node.js application.
@@ -25,19 +24,9 @@
 ## Deployment:
 + Use Jenkins to SSH into the EC2 instance and pull the Docker image from the registry.
   ```bash
-    agent {
-                node {
-                    
-                    label 'nodejs'
-                }
+    script {
+                sh "ssh -o StrictHostKeyChecking=no -i ${privateKeyName} ubuntu@13.127.37.206 'sudo docker run -t -id --name nodejs -p 3000:3000 vjyguvi/projectnodejs'"
             }
-            steps {
-               script { 
-                     withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dpass', usernameVariable: 'duser')]) {
-                   sh "docker login -u \$duser -p \$dpass"      
-                   sh "docker run -t -id --name nodejs -p 3000:3000 vjyguvi/projectnodejs"
-                    }   
-                }
 
 + Start a new Docker container on the EC2 instance using the Docker image.
   ![Screenshot container status](https://github.com/vijaygiitt/Project1_nodejs/assets/157097326/25450569-e905-40bd-9de2-a966d10ad25e)

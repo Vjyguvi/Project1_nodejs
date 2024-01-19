@@ -38,7 +38,7 @@ stages {
     agent any
     steps {
         script {
-                sh "ssh -o StrictHostKeyChecking=no -i ${privateKeyName} ubuntu@13.127.188.86 'sudo docker ps'"
+                sh "ssh -o StrictHostKeyChecking=no -i ${privateKeyName} ubuntu@13.127.188.86 'sudo docker run -t -id --name nodejs -p 3000:3000 vjyguvi/projectnodejs'"
             }
         }
     }

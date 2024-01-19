@@ -2,7 +2,7 @@ pipeline {
     agent any
      environment {
         // Define your remote server details
-        remoteServer = '3.111.30.67'
+        remoteServer = '13.127.188.86'
         remoteUser = 'ubuntu'
         privateKeyName = credentials('sshkeyansible')
         }
@@ -39,7 +39,7 @@ stages {
     steps {
         script {
             sshagent (credentials: ['sshkeyansible']) {
-                sh """ssh -o StrictHostKeyChecking=no -l ubuntu@3.111.30.67 'docker ps'"""
+                sh """ssh -o StrictHostKeyChecking=no -l ubuntu@13.127.188.86 'docker ps'"""
             }
         }
     }

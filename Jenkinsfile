@@ -39,9 +39,12 @@ stages {
             steps {
                 script {
 
+                sshagent(['sshkeyansible']) {
+
                    sh "docker ps"
                     }
             }
                         }
         }
+}
 }

@@ -14,25 +14,25 @@ stages {
         }
 
         // stage('Build Image') {
-            steps {
-                script {
+           // steps {
+              //  script {
                     
-                    sh "docker build -t vjyguvi/projectnodejs ."
-                }
-            }
-        }
+                  //  sh "docker build -t vjyguvi/projectnodejs ."
+        //        }
+         //   }
+       // }
 
         // stage('Push Image') {
-            steps {
-                script { 
-                     withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dpass', usernameVariable: 'duser')]) {
-    sh "docker login -u \$duser -p \$dpass"
-    sh "docker push vjyguvi/projectnodejs"
-}
+            //steps {
+               // script { 
+                    // withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dpass', usernameVariable: 'duser')]) {
+    // sh "docker login -u \$duser -p \$dpass"
+   // sh "docker push vjyguvi/projectnodejs"
+// }
                     
-                }
-            }
-        }
+//                }
+//            }
+//        }
 
         stage('Deploy') {
             agent any
@@ -46,3 +46,5 @@ stages {
             }
                         }
         }
+}
+}

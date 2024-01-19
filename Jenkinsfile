@@ -2,14 +2,14 @@ pipeline {
     agent any
      environment {
         // Define your remote server details
-        remoteServer = '13.127.37.206'
+        remoteServer = '3.111.30.67'
         remoteUser = 'ubuntu'
         privateKeyName = credentials('awskeyansible')
         }
 stages {
        stage('Checkout') {
             steps {
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/Vjy05git/Project1_nodejs.git']])
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/Vjyguvi/Project1_nodejs.git']])
             }
         }
 
@@ -39,8 +39,8 @@ stages {
             steps {
                 script {
 
-                        sh "ssh -o StrictHostKeyChecking=no -i ${privateKeyName} ubuntu@13.127.37.206 'docker login -u \$duser -p \$dpass'"
-                        sh "ssh -o StrictHostKeyChecking=no -i ${privateKeyName} ubuntu@13.127.37.206 'docker run -t -id --name nodejs -p 3000:3000 vjyguvi/projectnodejs'"
+                        sh "ssh -o StrictHostKeyChecking=no -i ${privateKeyName} ubuntu@3.111.30.67 'docker login -u \$duser -p \$dpass'"
+                        sh "ssh -o StrictHostKeyChecking=no -i ${privateKeyName} ubuntu@3.111.30.67 'docker run -t -id --name nodejs -p 3000:3000 vjyguvi/projectnodejs'"
                     }
             }
                         }

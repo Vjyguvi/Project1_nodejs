@@ -4,7 +4,7 @@ pipeline {
         // Define your remote server details
         remoteServer = '13.127.37.206'
         remoteUser = 'ubuntu'
-        remoteKey = credentials('awsssh')
+        privateKeyName = credentials('awskeyansible')
         }
 stages {
        stage('Checkout') {
@@ -39,9 +39,8 @@ stages {
             steps {
                 script {
 
-                    sshagent(['awsssh']) {
-                        sh "ssh -o StrictHostKeyChecking=no -i ${remoteKey} ${remoteUser}@${remoteServer} 'docker login -u \$duser -p \$dpass'"
-                        sh "ssh -o StrictHostKeyChecking=no -i ${remoteKey} ${remoteUser}@${remoteServer} 'docker run -t -id --name nodejs -p 3000:3000 vjyguvi/projectnodejs'"
+                        sh "ssh -o StrictHostKeyChecking=no -i ${privateKeyName} ubuntu@13.127.37.206 'docker login -u \$duser -p \$dpass'"
+                        sh "ssh -o StrictHostKeyChecking=no -i ${privateKeyName} ubuntu@13.127.37.206 'docker run -t -id --name nodejs -p 3000:3000 vjyguvi/projectnodejs'"
                     }
             }
                         }
